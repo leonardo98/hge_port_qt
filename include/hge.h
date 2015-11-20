@@ -10,9 +10,6 @@
 #ifndef HGE_H
 #define HGE_H
 
-
-#include <windows.h>
-
 #define HGE_VERSION 0x180
 
 #ifdef HGEDLL
