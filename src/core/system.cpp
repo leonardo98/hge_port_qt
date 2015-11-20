@@ -116,13 +116,13 @@ bool HGE_Impl::System_Initiate()
 	rectW.top=(GetSystemMetrics(SM_CYSCREEN)-height)/2;
 	rectW.right=rectW.left+width;
 	rectW.bottom=rectW.top+height;
-	styleW=WS_POPUP|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX|WS_VISIBLE; //WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX;
+//	styleW=WS_POPUP|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX|WS_VISIBLE; //WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX;
 
 	rectFS.left=0;
 	rectFS.top=0;
 	rectFS.right=nScreenWidth;
 	rectFS.bottom=nScreenHeight;
-	styleFS=WS_POPUP|WS_VISIBLE; //WS_POPUP
+//	styleFS=WS_POPUP|WS_VISIBLE; //WS_POPUP
 
 	if(hwndParent)
 	{
@@ -130,19 +130,20 @@ bool HGE_Impl::System_Initiate()
 		rectW.top=0;
 		rectW.right=nScreenWidth;
 		rectW.bottom=nScreenHeight;
-		styleW=WS_CHILD|WS_VISIBLE; 
+//		styleW=WS_CHILD|WS_VISIBLE;
 		bWindowed=true;
 	}
 
-	if(bWindowed)
-		hwnd = CreateWindowEx(0, WINDOW_CLASS_NAME, szWinTitle, styleW,
-				rectW.left, rectW.top, rectW.right-rectW.left, rectW.bottom-rectW.top,
-				hwndParent, NULL, hInstance, NULL);
-	else
-		hwnd = CreateWindowEx(WS_EX_TOPMOST, WINDOW_CLASS_NAME, szWinTitle, styleFS,
-				0, 0, 0, 0,
-				NULL, NULL, hInstance, NULL);
-	if (!hwnd)
+//	if(bWindowed)
+//		hwnd = CreateWindowEx(0, WINDOW_CLASS_NAME, szWinTitle, styleW,
+//				rectW.left, rectW.top, rectW.right-rectW.left, rectW.bottom-rectW.top,
+//				hwndParent, NULL, hInstance, NULL);
+//	else
+//		hwnd = CreateWindowEx(WS_EX_TOPMOST, WINDOW_CLASS_NAME, szWinTitle, styleFS,
+//				0, 0, 0, 0,
+//				NULL, NULL, hInstance, NULL);
+
+    if (!hwnd)
 	{
 		_PostError("Can't create window");
 		return false;
@@ -626,6 +627,8 @@ void HGE_Impl::System_Snapshot(const char *filename)
 
 HGE_Impl::HGE_Impl()
 {
+    hBass = false;
+
 	hInstance=GetModuleHandle(0);
 	hwnd=0;
 	bActive=false;

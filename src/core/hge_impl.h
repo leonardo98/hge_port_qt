@@ -243,11 +243,9 @@ public:
 
 	D3DPRESENT_PARAMETERS   d3dppW;
 	RECT					rectW;
-	LONG					styleW;
 
 	D3DPRESENT_PARAMETERS   d3dppFS;
 	RECT					rectFS;
-	LONG					styleFS;
 
 	IDirect3D8*				pD3D;
 	IDirect3DDevice8*		pD3DDevice;
@@ -322,6 +320,8 @@ public:
 	int					nFPS;
 	DWORD				t0, t0fps, dt;
 	int					cfps;
+
+    bool                hBass;
 
 
 private:

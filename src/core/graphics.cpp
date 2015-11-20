@@ -752,8 +752,16 @@ void HGE_Impl::_AdjustWindow()
 	RECT *rc;
 	LONG style;
 
-	if(bWindowed) {rc=&rectW; style=styleW; }
-	else  {rc=&rectFS; style=styleFS; }
+    if(bWindowed)
+    {
+        rc=&rectW;
+//        style=styleW;
+    }
+    else
+    {
+        rc=&rectFS;
+//        style=styleFS;
+    }
 	SetWindowLong(hwnd, GWL_STYLE, style);
 
 	style=GetWindowLong(hwnd, GWL_EXSTYLE);
