@@ -16,7 +16,7 @@
 
 const char *WINDOW_CLASS_NAME = "HGE__WNDCLASS";
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
+//LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 
 int			nRef=0;
@@ -172,7 +172,6 @@ bool CALL HGE_Impl::System_Initiate()
 
 	bool			(*func)();
 	bool			(*rfunc)();
-	HWND			hwndTmp;
 
 	if(pHGE->bDMO)
 	{
@@ -421,14 +420,6 @@ void CALL HGE_Impl::System_SetStateFunc(hgeFuncState state, hgeCallback value)
 	}
 }
 
-void CALL HGE_Impl::System_SetStateHwnd(hgeHwndState state, HWND value)
-{
-	switch(state)
-	{
-		case HGE_HWNDPARENT:	if(!hwnd) hwndParent=value; break;
-	}
-}
-
 void CALL HGE_Impl::System_SetStateInt(hgeIntState state, int value)
 {
 	switch(state)
@@ -540,17 +531,6 @@ hgeCallback CALL HGE_Impl::System_GetStateFunc(hgeFuncState state)
 	}
 
 	return NULL;
-}
-
-HWND CALL HGE_Impl::System_GetStateHwnd(hgeHwndState state)
-{
-	switch(state)
-	{
-		case HGE_HWND:			return hwnd;
-		case HGE_HWNDPARENT:	return hwndParent;
-	}
-
-	return 0;
 }
 
 int CALL HGE_Impl::System_GetStateInt(hgeIntState state)

@@ -15,11 +15,13 @@
 
 #define DEMO
 
+#define _MAX_PATH 1024
+
 #define D3DFVF_HGEVERTEX (D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1)
 #define VERTEX_BUFFER_SIZE 4000
 
 
-typedef BOOL (WINAPI *GetSystemPowerStatusFunc)(LPSYSTEM_POWER_STATUS);
+//typedef BOOL (WINAPI *GetSystemPowerStatusFunc)(LPSYSTEM_POWER_STATUS);
 
 
 struct CRenderTargetList
@@ -78,12 +80,10 @@ public:
 	virtual bool		CALL	System_Start();
 	virtual void		CALL	System_SetStateBool  (hgeBoolState   state, bool        value);
 	virtual void		CALL	System_SetStateFunc  (hgeFuncState   state, hgeCallback value);
-	virtual void		CALL	System_SetStateHwnd  (hgeHwndState   state, HWND        value);
 	virtual void		CALL	System_SetStateInt   (hgeIntState    state, int         value);
 	virtual void		CALL	System_SetStateString(hgeStringState state, const char *value);
 	virtual bool		CALL	System_GetStateBool  (hgeBoolState  );
 	virtual hgeCallback	CALL	System_GetStateFunc  (hgeFuncState  );
-	virtual HWND		CALL	System_GetStateHwnd  (hgeHwndState  );
 	virtual int			CALL	System_GetStateInt   (hgeIntState   );
 	virtual const char*	CALL	System_GetStateString(hgeStringState);
 	virtual char*		CALL	System_GetErrorMessage();
@@ -196,7 +196,6 @@ public:
 
 
 	HINSTANCE			hInstance;
-	HWND				hwnd;
 
 	bool				bActive;
 	char				szError[256];
@@ -229,7 +228,6 @@ public:
 	int					nHGEFPS;
 	bool				bHideMouse;
 	bool				bDontSuspend;
-	HWND				hwndParent;
 
 	#ifdef DEMO
 	bool				bDMO;

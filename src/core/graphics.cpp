@@ -759,32 +759,32 @@ void HGE_Impl::_AdjustWindow()
 	style=GetWindowLong(hwnd, GWL_EXSTYLE);
 	if(bWindowed)
 	{
-		SetWindowLong(hwnd, GWL_EXSTYLE, style & (~WS_EX_TOPMOST));
-	    SetWindowPos(hwnd, HWND_NOTOPMOST, rc->left, rc->top, rc->right-rc->left, rc->bottom-rc->top, SWP_FRAMECHANGED);
+//		SetWindowLong(hwnd, GWL_EXSTYLE, style & (~WS_EX_TOPMOST));
+//	    SetWindowPos(hwnd, HWND_NOTOPMOST, rc->left, rc->top, rc->right-rc->left, rc->bottom-rc->top, SWP_FRAMECHANGED);
 	}
 	else
 	{
-		SetWindowLong(hwnd, GWL_EXSTYLE, style | WS_EX_TOPMOST);
-	    SetWindowPos(hwnd, HWND_TOPMOST, rc->left, rc->top, rc->right-rc->left, rc->bottom-rc->top, SWP_FRAMECHANGED);
+//		SetWindowLong(hwnd, GWL_EXSTYLE, style | WS_EX_TOPMOST);
+//	    SetWindowPos(hwnd, HWND_TOPMOST, rc->left, rc->top, rc->right-rc->left, rc->bottom-rc->top, SWP_FRAMECHANGED);
 	}
 }
 
 void HGE_Impl::_Resize(int width, int height)
 {
-	if(hwndParent)
-	{
-		//if(procFocusLostFunc) procFocusLostFunc();
+//	if(hwndParent)
+//	{
+//		//if(procFocusLostFunc) procFocusLostFunc();
 
-		d3dppW.BackBufferWidth=width;
-		d3dppW.BackBufferHeight=height;
-		nScreenWidth=width;
-		nScreenHeight=height;
+//		d3dppW.BackBufferWidth=width;
+//		d3dppW.BackBufferHeight=height;
+//		nScreenWidth=width;
+//		nScreenHeight=height;
 
-		_SetProjectionMatrix(nScreenWidth, nScreenHeight);
-		_GfxRestore();
+//		_SetProjectionMatrix(nScreenWidth, nScreenHeight);
+//		_GfxRestore();
 
-		//if(procFocusGainFunc) procFocusGainFunc();
-	}
+//		//if(procFocusGainFunc) procFocusGainFunc();
+//	}
 }
 
 void HGE_Impl::_GfxDone()
