@@ -8,9 +8,6 @@
 
 
 #include "hge_impl.h"
-#include <d3d8.h>
-#include <d3dx8.h>
-
 
 void CALL HGE_Impl::Gfx_Clear(DWORD color)
 {
