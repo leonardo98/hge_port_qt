@@ -9,7 +9,7 @@
 
 #include "hge_impl.h"
 
-void CALL HGE_Impl::Gfx_Clear(DWORD color)
+void HGE_Impl::Gfx_Clear(DWORD color)
 {
 	if(pCurTarget)
 	{
@@ -27,7 +27,7 @@ void CALL HGE_Impl::Gfx_Clear(DWORD color)
 	}
 }
 
-void CALL HGE_Impl::Gfx_SetClipping(int x, int y, int w, int h)
+void HGE_Impl::Gfx_SetClipping(int x, int y, int w, int h)
 {
 	D3DVIEWPORT8 vp;
 	int scr_width, scr_height;
@@ -76,7 +76,7 @@ void CALL HGE_Impl::Gfx_SetClipping(int x, int y, int w, int h)
 	pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
-void CALL HGE_Impl::Gfx_SetTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale)
+void HGE_Impl::Gfx_SetTransform(float x, float y, float dx, float dy, float rot, float hscale, float vscale)
 {
 	D3DXMATRIX tmp;
 
@@ -96,7 +96,7 @@ void CALL HGE_Impl::Gfx_SetTransform(float x, float y, float dx, float dy, float
 	pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
 }
 
-bool CALL HGE_Impl::Gfx_BeginScene(HTARGET targ)
+bool HGE_Impl::Gfx_BeginScene(HTARGET targ)
 {
 	LPDIRECT3DSURFACE8 pSurf=0, pDepth=0;
 	D3DDISPLAYMODE Mode;
@@ -173,14 +173,14 @@ bool CALL HGE_Impl::Gfx_BeginScene(HTARGET targ)
 	return true;
 }
 
-void CALL HGE_Impl::Gfx_EndScene()
+void HGE_Impl::Gfx_EndScene()
 {
 	_render_batch(true);
 	pD3DDevice->EndScene();
 	if(!pCurTarget) pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
 
-void CALL HGE_Impl::Gfx_RenderLine(float x1, float y1, float x2, float y2, DWORD color, float z)
+void HGE_Impl::Gfx_RenderLine(float x1, float y1, float x2, float y2, DWORD color, float z)
 {
 	if(VertArray)
 	{
@@ -205,7 +205,7 @@ void CALL HGE_Impl::Gfx_RenderLine(float x1, float y1, float x2, float y2, DWORD
 	}
 }
 
-void CALL HGE_Impl::Gfx_RenderTriple(const hgeTriple *triple)
+void HGE_Impl::Gfx_RenderTriple(const hgeTriple *triple)
 {
 	if(VertArray)
 	{
@@ -226,7 +226,7 @@ void CALL HGE_Impl::Gfx_RenderTriple(const hgeTriple *triple)
 	}
 }
 
-void CALL HGE_Impl::Gfx_RenderQuad(const hgeQuad *quad)
+void HGE_Impl::Gfx_RenderQuad(const hgeQuad *quad)
 {
 	if(VertArray)
 	{
@@ -248,7 +248,7 @@ void CALL HGE_Impl::Gfx_RenderQuad(const hgeQuad *quad)
 	}
 }
 
-hgeVertex* CALL HGE_Impl::Gfx_StartBatch(int prim_type, HTEXTURE tex, int blend, int *max_prim)
+hgeVertex* HGE_Impl::Gfx_StartBatch(int prim_type, HTEXTURE tex, int blend, int *max_prim)
 {
 	if(VertArray)
 	{
@@ -268,12 +268,12 @@ hgeVertex* CALL HGE_Impl::Gfx_StartBatch(int prim_type, HTEXTURE tex, int blend,
 	else return 0;
 }
 
-void CALL HGE_Impl::Gfx_FinishBatch(int nprim)
+void HGE_Impl::Gfx_FinishBatch(int nprim)
 {
 	nPrim=nprim;
 }
 
-HTARGET CALL HGE_Impl::Target_Create(int width, int height, bool zbuffer)
+HTARGET HGE_Impl::Target_Create(int width, int height, bool zbuffer)
 {
 	CRenderTargetList *pTarget;
 	D3DSURFACE_DESC TDesc;
@@ -312,7 +312,7 @@ HTARGET CALL HGE_Impl::Target_Create(int width, int height, bool zbuffer)
 	return (HTARGET)pTarget;
 }
 
-void CALL HGE_Impl::Target_Free(HTARGET target)
+void HGE_Impl::Target_Free(HTARGET target)
 {
 	CRenderTargetList *pTarget=pTargets, *pPrevTarget=NULL;
 
@@ -337,14 +337,14 @@ void CALL HGE_Impl::Target_Free(HTARGET target)
 	}
 }
 
-HTEXTURE CALL HGE_Impl::Target_GetTexture(HTARGET target)
+HTEXTURE HGE_Impl::Target_GetTexture(HTARGET target)
 {
 	CRenderTargetList *targ=(CRenderTargetList *)target;
 	if(target) return (HTEXTURE)targ->pTex;
 	else return 0;
 }
 
-HTEXTURE CALL HGE_Impl::Texture_Create(int width, int height)
+HTEXTURE HGE_Impl::Texture_Create(int width, int height)
 {
 	LPDIRECT3DTEXTURE8 pTex;
 
@@ -362,7 +362,7 @@ HTEXTURE CALL HGE_Impl::Texture_Create(int width, int height)
 	return (HTEXTURE)pTex;
 }
 
-HTEXTURE CALL HGE_Impl::Texture_Load(const char *filename, DWORD size, bool bMipmap)
+HTEXTURE HGE_Impl::Texture_Load(const char *filename, DWORD size, bool bMipmap)
 {
 	void *data;
 	DWORD _size;
@@ -432,7 +432,7 @@ HTEXTURE CALL HGE_Impl::Texture_Load(const char *filename, DWORD size, bool bMip
 	return (HTEXTURE)pTex;
 }
 
-void CALL HGE_Impl::Texture_Free(HTEXTURE tex)
+void HGE_Impl::Texture_Free(HTEXTURE tex)
 {
 	LPDIRECT3DTEXTURE8 pTex=(LPDIRECT3DTEXTURE8)tex;
 	CTextureList *texItem=textures, *texPrev=0;
@@ -452,7 +452,7 @@ void CALL HGE_Impl::Texture_Free(HTEXTURE tex)
 	if(pTex != NULL) pTex->Release();
 }
 
-int CALL HGE_Impl::Texture_GetWidth(HTEXTURE tex, bool bOriginal)
+int HGE_Impl::Texture_GetWidth(HTEXTURE tex, bool bOriginal)
 {
 	D3DSURFACE_DESC TDesc;
 	LPDIRECT3DTEXTURE8 pTex=(LPDIRECT3DTEXTURE8)tex;
@@ -475,7 +475,7 @@ int CALL HGE_Impl::Texture_GetWidth(HTEXTURE tex, bool bOriginal)
 }
 
 
-int CALL HGE_Impl::Texture_GetHeight(HTEXTURE tex, bool bOriginal)
+int HGE_Impl::Texture_GetHeight(HTEXTURE tex, bool bOriginal)
 {
 	D3DSURFACE_DESC TDesc;
 	LPDIRECT3DTEXTURE8 pTex=(LPDIRECT3DTEXTURE8)tex;
@@ -498,7 +498,7 @@ int CALL HGE_Impl::Texture_GetHeight(HTEXTURE tex, bool bOriginal)
 }
 
 
-DWORD * CALL HGE_Impl::Texture_Lock(HTEXTURE tex, bool bReadOnly, int left, int top, int width, int height)
+DWORD * HGE_Impl::Texture_Lock(HTEXTURE tex, bool bReadOnly, int left, int top, int width, int height)
 {
 	LPDIRECT3DTEXTURE8 pTex=(LPDIRECT3DTEXTURE8)tex;
 	D3DSURFACE_DESC TDesc;
@@ -532,7 +532,7 @@ DWORD * CALL HGE_Impl::Texture_Lock(HTEXTURE tex, bool bReadOnly, int left, int 
 }
 
 
-void CALL HGE_Impl::Texture_Unlock(HTEXTURE tex)
+void HGE_Impl::Texture_Unlock(HTEXTURE tex)
 {
 	LPDIRECT3DTEXTURE8 pTex=(LPDIRECT3DTEXTURE8)tex;
 	pTex->UnlockRect(0);
