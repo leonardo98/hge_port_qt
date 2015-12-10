@@ -72,10 +72,10 @@ void HGE_Impl::Input_GetMousePos(float *x, float *y)
 
 void HGE_Impl::Input_SetMousePos(float x, float y)
 {
-	POINT pt;
-	pt.x=(long)x; pt.y=(long)y;
-	ClientToScreen(hwnd, &pt);
-	SetCursorPos(pt.x,pt.y);
+//	POINT pt;
+//	pt.x=(long)x; pt.y=(long)y;
+//	ClientToScreen(hwnd, &pt);
+//	SetCursorPos(pt.x,pt.y);
 }
 
 int HGE_Impl::Input_GetMouseWheel()
@@ -90,7 +90,8 @@ bool HGE_Impl::Input_IsMouseOver()
 
 bool HGE_Impl::Input_GetKeyState(int key)
 {
-	return ((GetKeyState(key) & 0x8000) != 0);
+//	return ((GetKeyState(key) & 0x8000) != 0);
+    return false;
 }
 
 bool HGE_Impl::Input_KeyDown(int key)
@@ -124,115 +125,115 @@ int HGE_Impl::Input_GetChar()
 
 void HGE_Impl::_InputInit()
 {
-	POINT	pt;
-	GetCursorPos(&pt);
-	ScreenToClient(hwnd, &pt);
-	Xpos = (float)pt.x;
-	Ypos = (float)pt.y;
+//	POINT	pt;
+//	GetCursorPos(&pt);
+//	ScreenToClient(hwnd, &pt);
+//	Xpos = (float)pt.x;
+//	Ypos = (float)pt.y;
 
 	memset(&keyz, 0, sizeof(keyz));
 }
 
 void HGE_Impl::_UpdateMouse()
 {
-	POINT	pt;
-	RECT	rc;
+//	POINT	pt;
+//	RECT	rc;
 
-	GetCursorPos(&pt);
-	GetClientRect(hwnd, &rc);
-	MapWindowPoints(hwnd, NULL, (LPPOINT)&rc, 2);
+//	GetCursorPos(&pt);
+//	GetClientRect(hwnd, &rc);
+//	MapWindowPoints(hwnd, NULL, (LPPOINT)&rc, 2);
 
-	if(bCaptured || (PtInRect(&rc, pt) && WindowFromPoint(pt)==hwnd))
-		bMouseOver=true;
-	else
-		bMouseOver=false;
+//	if(bCaptured || (PtInRect(&rc, pt) && WindowFromPoint(pt)==hwnd))
+//		bMouseOver=true;
+//	else
+//		bMouseOver=false;
 }
 
 void HGE_Impl::_BuildEvent(int type, int key, int scan, int flags, int x, int y)
 {
-	CInputEventList *last, *eptr=new CInputEventList;
-	unsigned char kbstate[256];
-	POINT pt;
+//	CInputEventList *last, *eptr=new CInputEventList;
+//	unsigned char kbstate[256];
+//	POINT pt;
 
-	eptr->event.type=type;
-	eptr->event.chr=0;
-	pt.x=x; pt.y=y;
+//	eptr->event.type=type;
+//	eptr->event.chr=0;
+//	pt.x=x; pt.y=y;
 
-	GetKeyboardState(kbstate);
-	if(type==INPUT_KEYDOWN)
-	{
-		if((flags & HGEINP_REPEAT) == 0) keyz[key] |= 1;
-		ToAscii(key, scan, kbstate, (unsigned short *)&eptr->event.chr, 0);
-	}
-	if(type==INPUT_KEYUP)
-	{
-		keyz[key] |= 2;
-		ToAscii(key, scan, kbstate, (unsigned short *)&eptr->event.chr, 0);
-	}
-	if(type==INPUT_MOUSEWHEEL)
-	{
-		eptr->event.key=0; eptr->event.wheel=key;
-		ScreenToClient(hwnd,&pt);
-	}
-	else { eptr->event.key=key; eptr->event.wheel=0; }
+//	GetKeyboardState(kbstate);
+//	if(type==INPUT_KEYDOWN)
+//	{
+//		if((flags & HGEINP_REPEAT) == 0) keyz[key] |= 1;
+//		ToAscii(key, scan, kbstate, (unsigned short *)&eptr->event.chr, 0);
+//	}
+//	if(type==INPUT_KEYUP)
+//	{
+//		keyz[key] |= 2;
+//		ToAscii(key, scan, kbstate, (unsigned short *)&eptr->event.chr, 0);
+//	}
+//	if(type==INPUT_MOUSEWHEEL)
+//	{
+//		eptr->event.key=0; eptr->event.wheel=key;
+//		ScreenToClient(hwnd,&pt);
+//	}
+//	else { eptr->event.key=key; eptr->event.wheel=0; }
 
-	if(type==INPUT_MBUTTONDOWN)
-	{
-		keyz[key] |= 1;
-		SetCapture(hwnd);
-		bCaptured=true;
-	}
-	if(type==INPUT_MBUTTONUP)
-	{
-		keyz[key] |= 2;
-		ReleaseCapture();
-		Input_SetMousePos(Xpos, Ypos);
-		pt.x=(int)Xpos; pt.y=(int)Ypos;
-		bCaptured=false;
-	}
+//	if(type==INPUT_MBUTTONDOWN)
+//	{
+//		keyz[key] |= 1;
+//		SetCapture(hwnd);
+//		bCaptured=true;
+//	}
+//	if(type==INPUT_MBUTTONUP)
+//	{
+//		keyz[key] |= 2;
+//		ReleaseCapture();
+//		Input_SetMousePos(Xpos, Ypos);
+//		pt.x=(int)Xpos; pt.y=(int)Ypos;
+//		bCaptured=false;
+//	}
 	
-	if(kbstate[VK_SHIFT] & 0x80) flags|=HGEINP_SHIFT;
-	if(kbstate[VK_CONTROL] & 0x80) flags|=HGEINP_CTRL;
-	if(kbstate[VK_MENU] & 0x80) flags|=HGEINP_ALT;
-	if(kbstate[VK_CAPITAL] & 0x1) flags|=HGEINP_CAPSLOCK;
-	if(kbstate[VK_SCROLL] & 0x1) flags|=HGEINP_SCROLLLOCK;
-	if(kbstate[VK_NUMLOCK] & 0x1) flags|=HGEINP_NUMLOCK;
-	eptr->event.flags=flags;
+//	if(kbstate[VK_SHIFT] & 0x80) flags|=HGEINP_SHIFT;
+//	if(kbstate[VK_CONTROL] & 0x80) flags|=HGEINP_CTRL;
+//	if(kbstate[VK_MENU] & 0x80) flags|=HGEINP_ALT;
+//	if(kbstate[VK_CAPITAL] & 0x1) flags|=HGEINP_CAPSLOCK;
+//	if(kbstate[VK_SCROLL] & 0x1) flags|=HGEINP_SCROLLLOCK;
+//	if(kbstate[VK_NUMLOCK] & 0x1) flags|=HGEINP_NUMLOCK;
+//	eptr->event.flags=flags;
 
-	if(pt.x==-1) { eptr->event.x=Xpos;eptr->event.y=Ypos; }
-	else
-	{
-		if(pt.x<0) pt.x=0;
-		if(pt.y<0) pt.y=0;
-		if(pt.x>=nScreenWidth) pt.x=nScreenWidth-1;
-		if(pt.y>=nScreenHeight) pt.y=nScreenHeight-1;
+//	if(pt.x==-1) { eptr->event.x=Xpos;eptr->event.y=Ypos; }
+//	else
+//	{
+//		if(pt.x<0) pt.x=0;
+//		if(pt.y<0) pt.y=0;
+//		if(pt.x>=nScreenWidth) pt.x=nScreenWidth-1;
+//		if(pt.y>=nScreenHeight) pt.y=nScreenHeight-1;
 
-		eptr->event.x=(float)pt.x;
-		eptr->event.y=(float)pt.y;
-	}
+//		eptr->event.x=(float)pt.x;
+//		eptr->event.y=(float)pt.y;
+//	}
 
-	eptr->next=0; 
+//	eptr->next=0;
 
-	if(!queue) queue=eptr;
-	else
-	{
-		last=queue;
-		while(last->next) last=last->next;
-		last->next=eptr;
-	}
+//	if(!queue) queue=eptr;
+//	else
+//	{
+//		last=queue;
+//		while(last->next) last=last->next;
+//		last->next=eptr;
+//	}
 
-	if(eptr->event.type==INPUT_KEYDOWN || eptr->event.type==INPUT_MBUTTONDOWN)
-	{
-		VKey=eptr->event.key;Char=eptr->event.chr;
-	}
-	else if(eptr->event.type==INPUT_MOUSEMOVE)
-	{
-		Xpos=eptr->event.x;Ypos=eptr->event.y;
-	}
-	else if(eptr->event.type==INPUT_MOUSEWHEEL)
-	{
-		Zpos+=eptr->event.wheel;
-	}
+//	if(eptr->event.type==INPUT_KEYDOWN || eptr->event.type==INPUT_MBUTTONDOWN)
+//	{
+//		VKey=eptr->event.key;Char=eptr->event.chr;
+//	}
+//	else if(eptr->event.type==INPUT_MOUSEMOVE)
+//	{
+//		Xpos=eptr->event.x;Ypos=eptr->event.y;
+//	}
+//	else if(eptr->event.type==INPUT_MOUSEWHEEL)
+//	{
+//		Zpos+=eptr->event.wheel;
+//	}
 }
 
 void HGE_Impl::_ClearQueue()

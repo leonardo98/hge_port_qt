@@ -15,6 +15,8 @@ const char FNTHEADERTAG[] = "[HGEFONT]";
 const char FNTBITMAPTAG[] = "Bitmap";
 const char FNTCHARTAG[]   = "Char";
 
+#define MAX_PATH 2048
+
 
 HGE *hgeFont::hge=0;
 char hgeFont::buffer[1024];
@@ -46,9 +48,9 @@ hgeFont::hgeFont(const char *szFont, bool bMipmap)
 	nBlend=BLEND_COLORMUL | BLEND_ALPHABLEND | BLEND_NOZWRITE;
 	dwCol=0xFFFFFFFF;
 
-	ZeroMemory( &letters, sizeof(letters) );
-	ZeroMemory( &pre, sizeof(letters) );
-	ZeroMemory( &post, sizeof(letters) );
+    memset( &letters, 0, sizeof(letters) );
+    memset( &pre, 0, sizeof(letters) );
+    memset( &post, 0, sizeof(letters) );
 	
 	// Load font description
 
@@ -174,7 +176,7 @@ void hgeFont::printf(float x, float y, int align, const char *format, ...)
 {
 	char	*pArg=(char *) &format+sizeof(format);
 
-	_vsnprintf(buffer, sizeof(buffer)-1, format, pArg);
+//	_vsnprintf(buffer, sizeof(buffer)-1, format, pArg);
 	buffer[sizeof(buffer)-1]=0;
 	//vsprintf(buffer, format, pArg);
 
@@ -188,7 +190,7 @@ void hgeFont::printfb(float x, float y, float w, float h, int align, const char 
 	float	tx, ty, hh, ww;
 	char	*pArg=(char *) &format+sizeof(format);
 
-	_vsnprintf(buffer, sizeof(buffer)-1, format, pArg);
+//	_vsnprintf(buffer, sizeof(buffer)-1, format, pArg);
 	buffer[sizeof(buffer)-1]=0;
 	//vsprintf(buffer, format, pArg);
 

@@ -12,6 +12,8 @@
 
 #define HGE_VERSION 0x180
 
+#include <algorithm>
+
 /*
 ** Common data types
 */

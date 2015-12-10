@@ -14,8 +14,9 @@ unsigned int g_seed=0;
 
 void HGE_Impl::Random_Seed(int seed)
 {
-	if(!seed) g_seed=timeGetTime();
-	else g_seed=seed;
+//	if(!seed) g_seed=timeGetTime();
+//	else
+        g_seed=seed;
 }
 
 int HGE_Impl::Random_Int(int min, int max)

@@ -239,26 +239,26 @@ public:
 
 
 	// Graphics
-	D3DPRESENT_PARAMETERS*  d3dpp;
+//	D3DPRESENT_PARAMETERS*  d3dpp;
 
-	D3DPRESENT_PARAMETERS   d3dppW;
-	RECT					rectW;
+//	D3DPRESENT_PARAMETERS   d3dppW;
+//	RECT					rectW;
 
-	D3DPRESENT_PARAMETERS   d3dppFS;
-	RECT					rectFS;
+//	D3DPRESENT_PARAMETERS   d3dppFS;
+//	RECT					rectFS;
 
-	IDirect3D8*				pD3D;
-	IDirect3DDevice8*		pD3DDevice;
-	IDirect3DVertexBuffer8*	pVB;
-	IDirect3DIndexBuffer8*	pIB;
+//	IDirect3D8*				pD3D;
+//	IDirect3DDevice8*		pD3DDevice;
+//	IDirect3DVertexBuffer8*	pVB;
+//	IDirect3DIndexBuffer8*	pIB;
 
-	IDirect3DSurface8*	pScreenSurf;
-	IDirect3DSurface8*	pScreenDepth;
+//	IDirect3DSurface8*	pScreenSurf;
+//	IDirect3DSurface8*	pScreenDepth;
 	CRenderTargetList*	pTargets;
 	CRenderTargetList*	pCurTarget;
 
-	D3DXMATRIX			matView;
-	D3DXMATRIX			matProj;
+//	D3DXMATRIX			matView;
+//	D3DXMATRIX			matProj;
 
 	CTextureList*		textures;
 	hgeVertex*			VertArray;
@@ -275,7 +275,7 @@ public:
 	void				_Resize(int width, int height);
 	bool				_init_lost();
 	void				_render_batch(bool bEndScene=false);
-	int					_format_id(D3DFORMAT fmt);
+//	int					_format_id(D3DFORMAT fmt);
 	void				_SetBlendMode(int blend);
 	void				_SetProjectionMatrix(int width, int height);
 	
@@ -309,8 +309,8 @@ public:
 	// Resources
 	char				szTmpFilename[_MAX_PATH];
 	CResourceList*		res;
-	HANDLE				hSearch;
-	WIN32_FIND_DATA		SearchData;
+//	HANDLE				hSearch;
+//	WIN32_FIND_DATA		SearchData;
 
 
 	// Timer

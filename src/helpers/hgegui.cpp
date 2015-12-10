@@ -94,7 +94,7 @@ hgeGUIObject* hgeGUI::GetCtrl(int id) const
 		ctrl=ctrl->next;
 	}
 
-	return NULL;
+    return 0;
 }
 
 void hgeGUI::MoveCtrl(int id, float x, float y)
